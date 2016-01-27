@@ -76,7 +76,13 @@ class BinaryTree {
 	}
 
 	size() {
-		return 0;
+		var counter = bypass(this.root);
+		function bypass(node) {
+			if(!node)
+				return 0;
+			return bypass(node.left) + bypass(node.right) + 1;
+        }
+        return counter;
 	}
 
 	isEmpty() {
