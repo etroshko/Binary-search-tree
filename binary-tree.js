@@ -45,31 +45,38 @@ class BinaryTree {
 		return isFound;
 	}
 
+
 	remove(data) {
-		// var isFound = false;
-		// var temp = this.root;
-		// var parent = null;
-		// while(!isFound && temp) {
-		// 	if(data < temp.data) {
-		// 		parent = temp;
-		// 		temp = temp.left;
-		// 	} 
-		// 	else if (data > temp.data) {
-		// 		parent = temp;
-		// 		temp = temp.right;
-		// 	}
-		// 	else isFound = true;
-		// }
-		// if(isFound) {
-
-		// }
-		// else {
-
-		// }
+		this.root = removeNode(this.root, data);
+		function removeNode(node, data) {
+			if(!node) return null;
+			if(data == node.data) {
+				if(!node.left && !node.right)
+					return null;
+				if(!node.left) 
+					return node.right;
+				if(!node.right)
+					return node.left;
+				var temp = node.right;
+				while (temp.left)
+					temp = temp.left;
+				node.data = temp.data;
+				node.right = removeNode(node.right, temp.data);
+				return node;
+			}
+			else if (data < node.data) {
+				node.left = removeNode(node.left, data);
+				return node;
+			}
+			else if (data > node.data) {
+				node.right = removeNode(node.right, data);
+				return node;
+			}
+		}
 	}
 
 	size() {
-
+		return 0;
 	}
 
 	isEmpty() {
